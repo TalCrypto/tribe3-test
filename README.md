@@ -1,6 +1,6 @@
 # Solidity Coding Test
 
-Sorry for in convenience, I didn't write full unit test scripts because this is not for production.
+Sorry for inconvenience, I didn't write full unit test scripts because this is not for production.
 ## What's done
 
 ### Main Task
