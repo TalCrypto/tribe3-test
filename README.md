@@ -1,37 +1,53 @@
 # Solidity Coding Test
 
-## Arbitrager
-This exercise is designed to test a programmer's understanding of the Solidity language, ability to research and integrate other protocols, and their understanding of both traditional finance and DeFi concepts such as arbitrage, decentralized exchanges, and automated market makers.
+Sorry for in convenience, I didn't write full unit test scripts because this is not for production.
+## What's done
 
 ### Main Task
-Modify the [Arbitrager.sol](https://github.com/Tribe3-xyz/coding-test/blob/main/contracts/Arbitrager.sol) contract to handle arbitraging a WETH/token pair between two exchanges that use Uniswap V2 contracts. The function needs to check that the call was profitable after accounting for the transaction cost and revert otherwise. Furthermore, please update the [test](https://github.com/Tribe3-xyz/coding-test/blob/main/test/test.js) to show the contract's functionality. The tests should answer the following questions:
-  1. What are the gas costs of calling the `arbitrage()` function?
-  2. What price disparity is necessary for the arbitrager to be profitable?
-  3. How much ETH needs to be sent to maximize profit?
+[Arbitrager.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/Arbitrager.sol)<br>
+[test](https://github.com/TalCrypto/tribe3-test/blob/main/test/test.js):
 
 ### Additional Challenges
-The following challenges are not required but they help us understand your coding skills and ability to handle architectural changes to the smart contracts.
   1. Modify the contract to support arbitrary token pairs.
+      >✅smart contrats: [AdvancedArbitrager.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/AdvancedArbitrager.sol)->arbitrage()<br>
+      >✅unit tests: [test.js](https://github.com/TalCrypto/tribe3-test/blob/main/test/test.js)
   2. Modify the contract to support multiple exchange interfaces (e.g. Uniswap V3, Balancer, 1Inch, etc.)
+      >Support of UniswapV3 <br>
+      >✅smart contracts: [AdvancedArbitrager.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/AdvancedArbitrager.sol)->normalArbitrageUniswapV2ToUniswapV3()<br>
+      >✅unit tests: [test.js](https://github.com/TalCrypto/tribe3-test/blob/main/test/test.js)
   3. Make the contract ownable and then have the contract use it's own funds for trading. Provide profit-sharing incentives to users who call the `arbitrage()` function.
+      >✅smart contrats: [AdvancedArbitrager.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/AdvancedArbitrager.sol) -> prfits, owner<br>
+      >✅unit tests: [test.js](https://github.com/TalCrypto/tribe3-test/blob/main/test/test.js)
   4. Add support for gas station network and use profits to pay for the gas costs.
+      >✅smart contrats
+      [TokenPaymaster.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/TokenPaymaster.sol), [AdvancedArbitrager.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/AdvancedArbitrager.sol)<br>
+      >✅uint tests: install GSN env and test the integration in [test-gsn.js](https://github.com/TalCrypto/tribe3-test/blob/main/test/test-gsn.js)
   5. Integrate flash loans to maximize profit.
+      >Integrate flash swap<br>
+      >✅smart contracts: [AdvancedArbitrager.sol](https://github.com/TalCrypto/tribe3-test/blob/main/contracts/AdvancedArbitrager.sol)->uniswapV2Call<br>
+      >✅unit tests: [test.js](https://github.com/TalCrypto/tribe3-test/blob/main/test/test.js)
 
-## Setup
-### Duplicate Repository
-[Duplicate this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository) and set it to private. Give read access to [Tribe3](https://github.com/webmaster-tribe3)
+## How to test
 
 ### Install
 ```
 yarn
 ```
 
-### Compile
+### Install modules
 ```
-yarn compile
+yarn install
 ```
 
-### Test
+### Test without gsn
 ```
 yarn test
+```
+### Test with gsn
+```
+yarn hardhat-node
+```
+>open anthother terminal
+```
+yarn test-gsn
 ```
